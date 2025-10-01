@@ -1,0 +1,15 @@
+session_name: blipblop
+windows:
+  - window_name: monitor
+    layout: tiled
+    panes:
+      - htop
+      - sudo nethogs -b eth0 wlan0 tailscale0 docker0
+
+  - window_name: actual
+    layout: tiled
+    shell_command_before:
+      - cd actual
+    panes:
+      - docker compose -f docker-compose.prod.yml up
+
