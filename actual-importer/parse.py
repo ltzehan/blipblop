@@ -8,11 +8,10 @@ from monopoly.pdf import PdfDocument, PdfParser
 from monopoly.pipeline import Pipeline
 from monopoly.statements import Transaction
 
-
-STATEMENTS_DIR = Path("statements")
+STATEMENTS_DIR = Path("./bank-statements").resolve()
 CACHE_FILE = STATEMENTS_DIR / Path(".parsed_cache.json")
 
-OUTPUT_DIR = Path("/tmp/actual-importer")
+OUTPUT_DIR = Path("./transactions")
 
 #
 #   Caching
@@ -121,24 +120,26 @@ def validate(txs: list[Transaction]) -> bool:
     return True
 
 if __name__ == "__main__":
-
     OUTPUT_DIR.mkdir(exist_ok=True)
 
     # Load cache
     parsed_cache_updated = False
     parsed_cache = load_cache()
 
-    for pdf_file in STATEMENTS_DIR.glob("*.pdf"):
+    statements = list(STATEMENTS_DIR.glob("*.pdf"))
+    print(f"Found {len(statements)} in {STATEMENTS_DIR}")
+
+    for pdf_file in statements:
         md5_hash = calc_md5(pdf_file)
         if md5_hash in parsed_cache:
-            print(f"Skipping file [{pdf_file.name}] with matching hash ({md5_hash[:8]})")
+            # print(f"Skipping file [{pdf_file.name}] with matching hash ({md5_hash[:8]})")
             continue
 
         print(f"Parsing file: {pdf_file.name}")
 
         output_path = parse(pdf_file)
         if not output_path:
-            print(f"> [!] Failed to parse file, skipping...")
+            print("> [!] Failed to parse file, skipping...")
             continue
         else:
             parsed_cache.add(md5_hash)
