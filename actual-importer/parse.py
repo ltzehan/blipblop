@@ -87,6 +87,7 @@ def parse(fp) -> Optional[Path]:
         transactions=transactions,
         statement=statement,
         output_directory=OUTPUT_DIR,
+        preserve_filename=False,
     )
 
     if validate(transactions):
