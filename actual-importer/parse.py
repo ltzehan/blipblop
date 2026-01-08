@@ -54,9 +54,22 @@ def postprocess_trust(txs: list[Transaction]) -> list[Transaction]:
 
     return list(filter(remove_balances, txs))
 
+def postprocess_dbs(txs: list[Transaction]) -> list[Transaction]:
+
+    def remove_debit_prefix(tx) -> Transaction:
+        PREFIX = "Debit Card transaction "
+        if tx.description.startswith(PREFIX):
+            tx.description = tx.description[len(PREFIX):]
+
+        return tx
+
+    return [remove_debit_prefix(tx) for tx in txs]
+
+
 VALID_BANKS = [Dbs, Trust]
 POSTPROCESS_FNS = {
     Trust: postprocess_trust,
+    Dbs: postprocess_dbs,
 }
 
 def parse(fp) -> Optional[Path]:
