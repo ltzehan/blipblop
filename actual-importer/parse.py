@@ -1,9 +1,11 @@
+import calendar
+from datetime import datetime
 import hashlib
 import json
 from pathlib import Path
 from typing import Optional
 
-from monopoly.banks import BankDetector, Dbs, Trust
+from monopoly.banks import BankDetector, Dbs, Trust, Citibank
 from monopoly.pdf import PdfDocument, PdfParser
 from monopoly.pipeline import Pipeline
 from monopoly.statements import Transaction
@@ -66,7 +68,7 @@ def postprocess_dbs(txs: list[Transaction]) -> list[Transaction]:
     return [remove_debit_prefix(tx) for tx in txs]
 
 
-VALID_BANKS = [Dbs, Trust]
+VALID_BANKS = [Dbs, Trust, Citibank]
 POSTPROCESS_FNS = {
     Trust: postprocess_trust,
     Dbs: postprocess_dbs,
@@ -86,6 +88,25 @@ def parse(fp) -> Optional[Path]:
 
     parser = PdfParser(bank, document)
     pipeline = Pipeline(parser)
+
+    # HACK: Citibank does not have statement date for one account (#243)
+    try: 
+        pipeline.handler.statement.statement_date
+    except ValueError:
+        # Expect statement name to be: YYMM-xxx.pdf
+        filename = fp.name 
+
+        year = int(filename[0:2]) + 2000
+        month = int(filename[2:4])
+        date = datetime(
+            year=year,
+            month=month,
+            # Set to last day of month
+            day=calendar.monthrange(year, month)[1]
+        )
+        print(f"> Inferred missing statement date as: {date}")
+
+        pipeline.handler.statement.statement_date = date
 
     # Disable safety checks because they are too stringent
     statement = pipeline.extract(safety_check=False)
