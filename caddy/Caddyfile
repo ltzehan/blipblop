@@ -2,19 +2,20 @@
     admin off
 }
 
-actual.blipblop {
+actual.blipblop.internal {
     tls internal
     encode gzip zstd
     reverse_proxy actual:5006
 }
 
-dawarich.blipblop {
+
+dawarich.blipblop.internal {
     tls internal
     encode gzip zstd
     reverse_proxy dawarich:3000
 }
 
-dockhand.blipblop {
+dockhand.blipblop.internal {
     tls internal 
     encode gzip zstd
     reverse_proxy dockhand:3000

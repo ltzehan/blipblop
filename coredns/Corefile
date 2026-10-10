@@ -1,8 +1,8 @@
-blipblop:53 {
+blipblop.internal:53 {
     bind 100.77.86.46
     errors
     template IN A {
-        match ^([^.]+\.)+blipblop\.$
+        match ^([^.]+\.)+blipblop\.internal\.$
         answer "{{ .Name }} 60 IN A 100.77.86.46"
     }
 }
