@@ -6,8 +6,10 @@ services:
       - '5006'
     environment:
       - ACTUAL_PORT=5006
+      - NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/caddy-root.crt
     volumes:
       - ./data:/data
+      - ./data/caddy-root.crt:/usr/local/share/ca-certificates/caddy-root.crt:ro
     healthcheck:
       # Enable health check for the instance
       test: ['CMD-SHELL', 'node src/scripts/health-check.js']

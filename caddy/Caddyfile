@@ -8,6 +8,11 @@ actual.blipblop.internal {
     reverse_proxy actual:5006
 }
 
+authentik.blipblop.internal {
+    tls internal
+    encode zstd gzip
+    reverse_proxy authentik-server:9000
+}
 
 dawarich.blipblop.internal {
     tls internal

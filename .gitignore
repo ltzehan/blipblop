@@ -1,6 +1,8 @@
 caddy/config/
 caddy/data/
 
+authentik/.env
+
 dockhand/data/
 
 actual/data/
