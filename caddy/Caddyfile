@@ -1,0 +1,21 @@
+{
+    admin off
+}
+
+actual.blipblop {
+    tls internal
+    encode gzip zstd
+    reverse_proxy actual-server:5006
+}
+
+dawarich.blipblop {
+    tls internal
+    encode gzip zstd
+    reverse_proxy dawarich:3000
+}
+
+dockhand.blipblop {
+    tls internal 
+    encode gzip zstd
+    reverse_proxy dockhand:3000
+}
