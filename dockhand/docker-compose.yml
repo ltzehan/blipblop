@@ -5,9 +5,12 @@ services:
     restart: unless-stopped
     expose:
       - "3000"
+    environment:
+      - NODE_EXTRA_CA_CERTS=/usr/local/share/ca-certificates/caddy-root.crt
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./data:/app/data
+      - ./data/caddy-root.crt:/usr/local/share/ca-certificates/caddy-root.crt:ro
     networks:
       - caddy
 
