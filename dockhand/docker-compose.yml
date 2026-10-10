@@ -3,13 +3,11 @@ services:
     image: fnsys/dockhand:latest
     container_name: dockhand
     restart: unless-stopped
-    ports:
-      - 3000:3000
-    # expose:
-    #   - "3000"
+    expose:
+      - "3000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./dockhand/data:/app/data
+      - ./data:/app/data
     networks:
       - caddy
 
