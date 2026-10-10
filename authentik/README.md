@@ -14,3 +14,8 @@ grep -q '^AUTHENTIK_SECRET_KEY=' .env || \
 chmod 600 .env
 
 ```
+
+Due to `caddy` CA certificate not being recognized, the `.crt` has to be copied into the containers:
+```bash
+sudo cp ./caddy/data/caddy/pki/authorities/local/root.crt ./actual/data/caddy-root.crt
+```
