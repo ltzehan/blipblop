@@ -2,8 +2,9 @@ name: blipblop
 
 include:
   - ./caddy/docker-compose.yml
+  - ./coredns/docker-compose.yml
   - ./dockhand/docker-compose.yml
-  # - ./actual/docker-compose.prod.yml
+  - ./actual/docker-compose.prod.yml
 
 networks:
   caddy:
