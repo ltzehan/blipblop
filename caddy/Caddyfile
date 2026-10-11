@@ -2,6 +2,11 @@
     admin off
 }
 
+blipblop.internal {
+    tls internal
+    reverse_proxy homepage:80
+}
+
 actual.blipblop.internal {
     tls internal
     encode gzip zstd
@@ -35,3 +40,4 @@ immich.blipblop.internal {
 http:// {
     redir https://{host}{uri} permanent
 }
+

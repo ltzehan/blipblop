@@ -1,0 +1,12 @@
+services:
+  homepage:
+    container_name: homepage
+    image: nginx:alpine
+    restart: unless-stopped
+    volumes:
+      - ./static:/usr/share/nginx/html:ro
+    expose:
+      - "80"
+    networks:
+      - caddy
+
