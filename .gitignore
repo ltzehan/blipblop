@@ -9,3 +9,5 @@ actual/data/
 
 dawarich/.env
 dawarich/data/
+
+immich/.env

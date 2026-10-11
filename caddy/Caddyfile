@@ -25,3 +25,9 @@ dockhand.blipblop.internal {
     encode gzip zstd
     reverse_proxy dockhand:3000
 }
+
+immich.blipblop.internal {
+    tls internal
+    encode zstd gzip
+    reverse_proxy immich_server:2283
+}
