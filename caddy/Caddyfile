@@ -31,3 +31,7 @@ immich.blipblop.internal {
     encode zstd gzip
     reverse_proxy immich_server:2283
 }
+
+http:// {
+    redir https://{host}{uri} permanent
+}
