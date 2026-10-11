@@ -6,3 +6,5 @@ authentik/.env
 dockhand/data/
 
 actual/data/
+
+dawarich/.env

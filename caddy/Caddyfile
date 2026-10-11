@@ -17,7 +17,7 @@ authentik.blipblop.internal {
 dawarich.blipblop.internal {
     tls internal
     encode gzip zstd
-    reverse_proxy dawarich:3000
+    reverse_proxy dawarich_app:3000
 }
 
 dockhand.blipblop.internal {

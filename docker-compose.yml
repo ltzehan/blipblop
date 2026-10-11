@@ -6,6 +6,7 @@ include:
   - ./authentik/docker-compose.yml
   - ./dockhand/docker-compose.yml
   - ./actual/docker-compose.prod.yml
+  - ./dawarich/docker-compose.yml
 
 networks:
   caddy:
