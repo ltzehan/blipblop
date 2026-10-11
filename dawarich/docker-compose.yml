@@ -51,6 +51,7 @@ services:
       - dawarich_watched:/var/app/tmp/imports/watched
       - dawarich_storage:/var/app/storage
       - dawarich_db_data:/dawarich_db_data
+      - ./data/caddy-root.crt:/usr/lib/ssl/caddy-root.crt:ro
     networks:
       - dawarich
       - caddy
@@ -64,11 +65,21 @@ services:
     environment:
       RAILS_ENV: ${RAILS_ENV:-production}
       REDIS_URL: ${REDIS_URL:-redis://dawarich_redis:6379}
+      SSL_CERT_FILE: /usr/lib/ssl/caddy-root.crt
       DATABASE_HOST: ${DATABASE_HOST:-dawarich_db}
       DATABASE_PORT: ${DATABASE_PORT:-5432}
       DATABASE_USERNAME: ${DATABASE_USERNAME:-postgres}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD:-password}
       DATABASE_NAME: ${DATABASE_NAME:-dawarich_development}
+      OIDC_CLIENT_ID: ${OIDC_CLIENT_ID}
+      OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET}
+      OIDC_ISSUER: ${OIDC_ISSUER}
+      OIDC_REDIRECT_URI: ${OIDC_REDIRECT_URI}
+      OIDC_PROVIDER_NAME: ${OIDC_PROVIDER_NAME}
+      OIDC_AUTO_REGISTER: ${OIDC_AUTO_REGISTER}
+      OIDC_PKCE_ENABLED: ${OIDC_PKCE_ENABLED}
+      ALLOW_EMAIL_PASSWORD_REGISTRATION: ${ALLOW_EMAIL_PASSWORD_REGISTRATION}
+      ALLOW_EMAIL_PASSWORD_LOGIN: ${ALLOW_EMAIL_PASSWORD_LOGIN}
       APPLICATION_HOSTS: ${APPLICATION_HOSTS:-localhost,::1,127.0.0.1}
       TIME_ZONE: ${TIME_ZONE:-Europe/London}
       APPLICATION_PROTOCOL: ${APPLICATION_PROTOCOL:-http}
@@ -111,6 +122,7 @@ services:
       - dawarich_public:/var/app/public
       - dawarich_watched:/var/app/tmp/imports/watched
       - dawarich_storage:/var/app/storage
+      - ./data/caddy-root.crt:/usr/lib/ssl/caddy-root.crt:ro
     networks:
       - dawarich
     stdin_open: true
@@ -121,11 +133,21 @@ services:
     environment:
       RAILS_ENV: ${RAILS_ENV:-production}
       REDIS_URL: ${REDIS_URL:-redis://dawarich_redis:6379}
+      SSL_CERT_FILE: /usr/lib/ssl/caddy-root.crt
       DATABASE_HOST: ${DATABASE_HOST:-dawarich_db}
       DATABASE_PORT: ${DATABASE_PORT:-5432}
       DATABASE_USERNAME: ${DATABASE_USERNAME:-postgres}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD:-password}
       DATABASE_NAME: ${DATABASE_NAME:-dawarich_development}
+      OIDC_CLIENT_ID: ${OIDC_CLIENT_ID}
+      OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET}
+      OIDC_ISSUER: ${OIDC_ISSUER}
+      OIDC_REDIRECT_URI: ${OIDC_REDIRECT_URI}
+      OIDC_PROVIDER_NAME: ${OIDC_PROVIDER_NAME}
+      OIDC_AUTO_REGISTER: ${OIDC_AUTO_REGISTER}
+      OIDC_PKCE_ENABLED: ${OIDC_PKCE_ENABLED}
+      ALLOW_EMAIL_PASSWORD_REGISTRATION: ${ALLOW_EMAIL_PASSWORD_REGISTRATION}
+      ALLOW_EMAIL_PASSWORD_LOGIN: ${ALLOW_EMAIL_PASSWORD_LOGIN}
       APPLICATION_HOSTS: ${APPLICATION_HOSTS:-localhost,::1,127.0.0.1}
       # 3 job threads keep idle memory and DB connections low; raise
       # temporarily for large imports.
