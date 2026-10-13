@@ -37,6 +37,12 @@ immich.blipblop.internal {
     reverse_proxy immich_server:2283
 }
 
+immich-pt.blipblop.internal {
+    tls internal
+    encode zstd gzip
+    reverse_proxy immich_power_tools:3000
+}
+
 http:// {
     redir https://{host}{uri} permanent
 }
