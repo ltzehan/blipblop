@@ -9,6 +9,7 @@ include:
   - ./actual/docker-compose.prod.yml
   - ./dawarich/docker-compose.yml
   - ./immich/docker-compose.yml
+  - ./pgadmin/docker-compose.yml
 
 networks:
   caddy:

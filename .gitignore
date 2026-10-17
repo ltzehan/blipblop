@@ -12,3 +12,5 @@ dawarich/data/
 
 immich/.env
 immich/data/
+
+pgadmin/.env
