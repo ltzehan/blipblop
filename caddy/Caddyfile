@@ -1,50 +1,64 @@
 {
     admin off
+
+    pki {
+        ca local {
+            intermediate_lifetime 30d
+        }
+    }
+}
+
+(internal_tls) {
+    tls {
+        issuer internal {
+            lifetime 7d
+        }
+    }
 }
 
 blipblop.internal {
-    tls internal
+    import internal_tls
     reverse_proxy homepage:80
 }
 
 actual.blipblop.internal {
-    tls internal
+    import internal_tls
     encode gzip zstd
     reverse_proxy actual:5006
 }
 
 authentik.blipblop.internal {
-    tls internal
+    import internal_tls
     encode zstd gzip
     reverse_proxy authentik-server:9000
 }
 
 dawarich.blipblop.internal {
-    tls internal
+    import internal_tls
     encode gzip zstd
     reverse_proxy dawarich_app:3000
 }
 
 dockhand.blipblop.internal {
-    tls internal 
+    import internal_tls 
     encode gzip zstd
     reverse_proxy dockhand:3000
 }
 
 immich.blipblop.internal {
-    tls internal
+    import internal_tls
     encode zstd gzip
     reverse_proxy immich_server:2283
 }
 
 immich-pt.blipblop.internal {
-    tls internal
+    import internal_tls
     encode zstd gzip
     reverse_proxy immich_power_tools:3000
 }
 
 pgadmin.blipblop.internal {
-    tls internal
+    import internal_tls
     encode zstd gzip
     reverse_proxy pgadmin:80
 }
