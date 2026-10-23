@@ -1,0 +1,27 @@
+services:
+  backrest:
+    image: ghcr.io/garethgeorge/backrest:latest
+    container_name: backrest
+    hostname: backrest
+    user: "root"
+    volumes:
+      - ./backrest/data:/data
+      - ./backrest/config:/config
+      - ./backrest/cache:/cache
+      - ./backrest/tmp:/tmp
+      - /mnt:/mnt:shared
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/lib/docker/volumes:/userdata/docker-volumes:ro
+      - /home/blipblop/blipblop/:/userdata/blipblop:ro
+      - /srv/immich/library/:/userdata/immich-library:ro
+    environment:
+      - BACKREST_DATA=/data
+      - BACKREST_CONFIG=/config/config.json
+      - XDG_CACHE_HOME=/cache
+      - TMPDIR=/tmp
+      - TZ=Asia/Singapore
+    expose:
+      - "9898"
+    networks:
+      - caddy
+    restart: unless-stopped

@@ -14,3 +14,5 @@ immich/.env
 immich/data/
 
 pgadmin/.env
+
+backrest/backrest/

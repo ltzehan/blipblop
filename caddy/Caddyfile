@@ -33,6 +33,12 @@ authentik.blipblop.internal {
     reverse_proxy authentik-server:9000
 }
 
+backrest.blipblop.internal {
+    import internal_tls
+    encode zstd gzip
+    reverse_proxy backrest:9898
+}
+
 dawarich.blipblop.internal {
     import internal_tls
     encode gzip zstd

@@ -10,6 +10,7 @@ include:
   - ./dawarich/docker-compose.yml
   - ./immich/docker-compose.yml
   - ./pgadmin/docker-compose.yml
+  - ./backrest/docker-compose.yml
 
 networks:
   caddy:
